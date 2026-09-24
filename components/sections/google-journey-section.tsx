@@ -2,7 +2,6 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
 import { Play, RotateCcw, ChevronRight, Pause } from "lucide-react";
 
 export function GoogleJourneySection() {
@@ -12,68 +11,52 @@ export function GoogleJourneySection() {
   const steps = [
     {
       id: 0,
-      title: "You Type google.com",
-      description: "Your browser needs to find where Google is located on the Internet.",
-      visual: "browser",
-      emoji: "💻",
-      color: "from-blue-500 to-cyan-500",
+      title: "You Type",
+      description: "Your browser needs to find where Google is located",
+      icon: "💻",
     },
     {
       id: 1,
       title: "DNS Lookup",
-      description: "Your computer asks the DNS (Domain Name System) to translate 'google.com' into an IP address.",
-      visual: "dns",
-      emoji: "📖",
-      color: "from-purple-500 to-pink-500",
-      detail: "DNS is like the Internet's phonebook - it converts human-readable names into IP addresses!",
+      description: "DNS translates 'google.com' into an IP address",
+      icon: "📖",
+      detail: "DNS is like the Internet's phonebook",
     },
     {
       id: 2,
-      title: "Through Your Router",
-      description: "The request goes through your home router.",
-      visual: "router",
-      emoji: "📡",
-      color: "from-green-500 to-emerald-500",
+      title: "Router",
+      description: "Request goes through your home router",
+      icon: "📡",
     },
     {
       id: 3,
-      title: "To Your ISP",
-      description: "Your Internet Service Provider forwards the request to the Internet.",
-      visual: "isp",
-      emoji: "🏢",
-      color: "from-yellow-500 to-orange-500",
+      title: "ISP",
+      description: "Your provider forwards the request",
+      icon: "🏢",
     },
     {
       id: 4,
-      title: "Across the Internet",
-      description: "Data travels through multiple routers and networks to reach Google's servers.",
-      visual: "internet",
-      emoji: "🌐",
-      color: "from-red-500 to-pink-500",
+      title: "Internet",
+      description: "Data travels through multiple networks",
+      icon: "🌐",
     },
     {
       id: 5,
-      title: "Google's Server",
-      description: "Google's server receives your request and prepares the response.",
-      visual: "server",
-      emoji: "🖥️",
-      color: "from-indigo-500 to-purple-500",
+      title: "Google Server",
+      description: "Google receives and processes your request",
+      icon: "🖥️",
     },
     {
       id: 6,
-      title: "Response Travels Back",
-      description: "The response travels back through the Internet to your computer.",
-      visual: "response",
-      emoji: "📦",
-      color: "from-green-500 to-blue-500",
+      title: "Response Returns",
+      description: "The webpage travels back to you",
+      icon: "📦",
     },
     {
       id: 7,
-      title: "Google Loads!",
-      description: "Your browser displays the Google homepage.",
-      visual: "complete",
-      emoji: "🎉",
-      color: "from-neon-green to-neon-blue",
+      title: "Page Loads",
+      description: "Your browser displays Google",
+      icon: "✓",
     },
   ];
 
@@ -120,261 +103,204 @@ export function GoogleJourneySection() {
     setCurrentStep((prev) => Math.max(prev - 1, 0));
   };
 
-  // Keyboard navigation
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "ArrowRight") {
-        e.preventDefault();
-        handleNext();
-      } else if (e.key === "ArrowLeft") {
-        e.preventDefault();
-        handlePrev();
-      } else if (e.key === " ") {
-        e.preventDefault();
-        if (isPlaying) {
-          handlePause();
-        } else {
-          handlePlay();
-        }
-      }
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [currentStep, isPlaying]);
-
   return (
     <section
       id="section-6"
-      className="min-h-screen flex items-center justify-center py-20 px-6 bg-gradient-to-b from-black via-green-900/10 to-black"
+      className="presentation-section"
     >
-      <div className="max-w-6xl mx-auto w-full">
-        <motion.h2
-          className="text-5xl md:text-6xl font-bold text-center mb-6 bg-gradient-to-r from-neon-green to-neon-blue bg-clip-text text-transparent"
-          initial={{ opacity: 0, y: 30 }}
+      <div className="presentation-content">
+        <motion.div
+          className="mb-12 text-center"
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
         >
-          What Happens When You Type google.com?
-        </motion.h2>
-
-        {/* Search Bar */}
-        <motion.div
-          className="max-w-2xl mx-auto mb-12"
-          initial={{ opacity: 0, scale: 0.9 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <div className="bg-gray-800 rounded-full p-4 border-2 border-neon-blue shadow-lg shadow-neon-blue/50 flex items-center gap-4">
-            <span className="text-2xl ml-2">🔍</span>
-            <input
-              type="text"
-              value="google.com"
-              readOnly
-              className="flex-1 bg-transparent text-white text-xl outline-none"
-            />
-            <Button
-              onClick={handlePlay}
-              disabled={isPlaying}
-              variant="neon"
-              className="rounded-full"
-            >
-              GO
-            </Button>
-          </div>
+          <div className="section-label mb-4">04 / WEBSITE REQUEST</div>
+          <h2 className="section-title mb-8">
+            What Happens When You Type
+          </h2>
+          
+          {/* Search Bar */}
+          <motion.div
+            className="max-w-xl mx-auto"
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+          >
+            <div className="bg-[#0F172A]/60 backdrop-blur-sm rounded-full p-4 border border-primary/20 flex items-center gap-4 shadow-lg">
+              <span className="text-2xl ml-2">🔍</span>
+              <input
+                type="text"
+                value="google.com"
+                readOnly
+                className="flex-1 bg-transparent text-foreground text-lg outline-none font-medium"
+              />
+              <button
+                onClick={handlePlay}
+                disabled={isPlaying}
+                className="btn-primary text-sm px-6 py-2 disabled:opacity-50"
+              >
+                GO
+              </button>
+            </div>
+          </motion.div>
         </motion.div>
 
-        {/* Progress Indicator */}
-        <div className="mb-8 bg-gray-900/50 rounded-2xl p-6 border border-neon-blue/30">
-          <div className="flex items-center justify-between overflow-x-auto gap-2">
+        {/* Horizontal Progress Steps */}
+        <div className="mb-12 overflow-x-auto pb-4">
+          <div className="flex items-center justify-center gap-3 min-w-max px-4">
             {steps.map((step, idx) => (
               <div key={idx} className="flex items-center">
-                <motion.div
-                  className={`flex flex-col items-center min-w-[80px] cursor-pointer`}
+                <motion.button
+                  className={`network-node ${
+                    currentStep === idx
+                      ? "network-node--active"
+                      : currentStep > idx
+                      ? ""
+                      : "network-node--inactive"
+                  }`}
+                  style={{ cursor: 'pointer' }}
                   animate={{
-                    scale: currentStep === idx ? 1.1 : 1,
-                    opacity: currentStep >= idx ? 1 : 0.4,
+                    opacity: currentStep >= idx || currentStep === -1 ? 1 : 0.3,
                   }}
                   onClick={() => {
                     setIsPlaying(false);
                     setCurrentStep(idx);
                   }}
+                  whileHover={{ y: -4 }}
                 >
-                  <div
-                    className={`w-12 h-12 rounded-full flex items-center justify-center mb-2 ${
-                      currentStep >= idx
-                        ? `bg-gradient-to-r ${step.color}`
-                        : "bg-gray-700"
-                    }`}
-                  >
-                    <span className="text-2xl">{step.emoji}</span>
+                  <div className="network-node__icon" style={{ width: '70px', height: '70px', fontSize: '2rem' }}>
+                    <span>{step.icon}</span>
                   </div>
-                  <p className="text-xs text-center text-gray-400">
-                    {idx + 1}. {step.title.split(" ")[0]}
-                  </p>
-                </motion.div>
+                  <div className="network-node__label">
+                    <div className="text-xs font-semibold uppercase tracking-wide">
+                      {step.title}
+                    </div>
+                  </div>
+                </motion.button>
+
                 {idx < steps.length - 1 && (
                   <motion.div
-                    className="w-8 h-1 mx-1 rounded"
+                    className="flex items-center mx-2"
                     animate={{
-                      backgroundColor:
-                        currentStep > idx ? "#00f0ff" : "#4b5563",
+                      opacity: currentStep > idx ? 1 : 0.2,
                     }}
-                    transition={{ duration: 0.5 }}
-                  />
+                  >
+                    <div
+                      className={`connection-line w-12 ${
+                        currentStep > idx ? "connection-line--active" : ""
+                      }`}
+                    >
+                      <div className="connection-line__packet" />
+                    </div>
+                  </motion.div>
                 )}
               </div>
             ))}
           </div>
         </div>
 
-        {/* Main Visualization */}
+        {/* Main Explanation */}
         <AnimatePresence mode="wait">
           {currentStep >= 0 && (
             <motion.div
               key={currentStep}
-              className={`bg-gradient-to-br ${steps[currentStep].color} rounded-3xl p-8 mb-8 shadow-2xl`}
-              initial={{ opacity: 0, y: 50, scale: 0.9 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: -50, scale: 0.9 }}
-              transition={{ duration: 0.5 }}
+              className="max-w-2xl mx-auto mb-12"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.3 }}
             >
-              <div className="flex flex-col md:flex-row items-center gap-8">
-                <motion.div
-                  className="text-9xl"
-                  animate={{ rotate: [0, 10, -10, 0] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                >
-                  {steps[currentStep].emoji}
-                </motion.div>
+              <div className="relative bg-[#0F172A]/95 backdrop-blur-xl border border-primary/20 rounded-2xl p-8">
+                {/* Accent */}
+                <div className="absolute top-0 left-8 w-16 h-1 bg-primary rounded-full" />
+                
+                <div className="flex items-start gap-6">
+                  <motion.div
+                    className="text-6xl flex-shrink-0"
+                    initial={{ scale: 0, rotate: -20 }}
+                    animate={{ scale: 1, rotate: 0 }}
+                    transition={{ type: "spring", stiffness: 200 }}
+                  >
+                    {steps[currentStep].icon}
+                  </motion.div>
 
-                <div className="flex-1 text-white">
-                  <motion.h3
-                    className="text-4xl font-bold mb-4"
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.2 }}
-                  >
-                    Step {currentStep + 1}: {steps[currentStep].title}
-                  </motion.h3>
-                  <motion.p
-                    className="text-xl mb-4"
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.3 }}
-                  >
-                    {steps[currentStep].description}
-                  </motion.p>
-                  {steps[currentStep].detail && (
-                    <motion.div
-                      className="bg-white/20 rounded-xl p-4 backdrop-blur"
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.4 }}
-                    >
-                      <p className="text-lg">{steps[currentStep].detail}</p>
-                    </motion.div>
-                  )}
+                  <div className="flex-1 space-y-3">
+                    <div className="flex items-center gap-3">
+                      <span className="text-sm font-bold text-primary">
+                        STEP {currentStep + 1}
+                      </span>
+                      <div className="h-px flex-1 bg-primary/20" />
+                    </div>
+                    <h3 className="text-2xl font-bold text-foreground">
+                      {steps[currentStep].title}
+                    </h3>
+                    <p className="explanation-text">
+                      {steps[currentStep].description}
+                    </p>
+                    {steps[currentStep].detail && (
+                      <div className="mt-4 p-3 bg-primary/5 rounded-lg border border-primary/10">
+                        <p className="text-sm text-primary font-medium">
+                          💡 {steps[currentStep].detail}
+                        </p>
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
-
-              {/* Visual Flow */}
-              {currentStep === 4 && (
-                <motion.div
-                  className="mt-8 flex items-center justify-center gap-4"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.5 }}
-                >
-                  <div className="text-4xl">💻</div>
-                  <motion.div
-                    className="text-4xl"
-                    animate={{ x: [0, 10, 0] }}
-                    transition={{ duration: 0.5, repeat: Infinity }}
-                  >
-                    →
-                  </motion.div>
-                  <div className="text-4xl">📡</div>
-                  <motion.div
-                    className="text-4xl"
-                    animate={{ x: [0, 10, 0] }}
-                    transition={{ duration: 0.5, repeat: Infinity, delay: 0.2 }}
-                  >
-                    →
-                  </motion.div>
-                  <div className="text-4xl">📡</div>
-                  <motion.div
-                    className="text-4xl"
-                    animate={{ x: [0, 10, 0] }}
-                    transition={{ duration: 0.5, repeat: Infinity, delay: 0.4 }}
-                  >
-                    →
-                  </motion.div>
-                  <div className="text-4xl">📡</div>
-                  <motion.div
-                    className="text-4xl"
-                    animate={{ x: [0, 10, 0] }}
-                    transition={{ duration: 0.5, repeat: Infinity, delay: 0.6 }}
-                  >
-                    →
-                  </motion.div>
-                  <div className="text-4xl">🖥️</div>
-                </motion.div>
-              )}
             </motion.div>
           )}
         </AnimatePresence>
 
         {/* Controls */}
-        <div className="flex justify-center gap-4 flex-wrap">
+        <div className="flex justify-center gap-3 flex-wrap">
           {!isPlaying ? (
-            <Button
+            <button
               onClick={handlePlay}
-              variant="neon"
-              size="lg"
+              className="btn-primary"
             >
-              <Play className="mr-2" />
-              Play Animation
-            </Button>
+              <Play className="w-4 h-4" />
+              {currentStep === -1 ? "Start Animation" : "Play"}
+            </button>
           ) : (
-            <Button
+            <button
               onClick={handlePause}
-              variant="neon"
-              size="lg"
+              className="btn-primary"
             >
-              <Pause className="mr-2" />
+              <Pause className="w-4 h-4" />
               Pause
-            </Button>
+            </button>
           )}
           
           {currentStep >= 0 && (
             <>
-              <Button
+              <button
                 onClick={handlePrev}
                 disabled={currentStep === 0}
-                variant="outline"
-                size="lg"
+                className="btn-secondary disabled:opacity-30"
               >
                 Previous
-              </Button>
+              </button>
               
-              <Button
+              <button
                 onClick={handleNext}
                 disabled={currentStep === steps.length - 1}
-                variant="outline"
-                size="lg"
+                className="btn-secondary disabled:opacity-30"
               >
-                Next Step <ChevronRight className="ml-2" />
-              </Button>
+                Next Step
+                <ChevronRight className="w-4 h-4" />
+              </button>
             </>
           )}
 
-          <Button onClick={handleReset} variant="outline" size="lg">
-            <RotateCcw className="mr-2" />
+          <button 
+            onClick={handleReset} 
+            className="btn-secondary"
+          >
+            <RotateCcw className="w-4 h-4" />
             Reset
-          </Button>
+          </button>
         </div>
       </div>
     </section>

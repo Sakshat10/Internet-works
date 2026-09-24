@@ -2,21 +2,20 @@
 
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
 
 export function MessageSendingSection() {
   const [currentNode, setCurrentNode] = useState(-1);
 
   const nodes = [
-    { emoji: "👨‍💻", label: "YOU" },
-    { emoji: "📡", label: "Router" },
-    { emoji: "🏢", label: "ISP" },
-    { emoji: "🌐", label: "Internet" },
-    { emoji: "🖥️", label: "Server" },
-    { emoji: "🌐", label: "Internet" },
-    { emoji: "🏢", label: "ISP" },
-    { emoji: "📡", label: "Router" },
-    { emoji: "👩‍💻", label: "FRIEND" },
+    { icon: "👨‍💻", label: "YOU" },
+    { icon: "📡", label: "Router" },
+    { icon: "🏢", label: "ISP" },
+    { icon: "🌐", label: "Internet" },
+    { icon: "🖥️", label: "Server" },
+    { icon: "🌐", label: "Internet" },
+    { icon: "🏢", label: "ISP" },
+    { icon: "📡", label: "Router" },
+    { icon: "👩‍💻", label: "FRIEND" },
   ];
 
   const handleSendMessage = () => {
@@ -35,148 +34,182 @@ export function MessageSendingSection() {
   return (
     <section
       id="section-7"
-      className="min-h-screen flex items-center justify-center py-12 px-6 bg-[#050816]"
+      className="presentation-section"
     >
-      <div className="max-w-7xl mx-auto w-full">
-        <motion.h2
-          className="text-4xl md:text-5xl font-bold text-white text-center mb-20"
-          initial={{ opacity: 0, y: 30 }}
+      <div className="presentation-content">
+        <motion.div
+          className="mb-16 text-center"
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
         >
-          Sending a Message to Your Friend
-        </motion.h2>
+          <div className="section-label mb-4">05 / MESSAGE JOURNEY</div>
+          <h2 className="section-title">
+            Sending a Message to Your Friend
+          </h2>
+        </motion.div>
 
-        {/* Horizontal Journey Flow */}
-        <div className="relative mb-20">
-          {/* Horizontal line connecting all nodes */}
-          <div className="absolute top-1/2 left-0 right-0 h-1 bg-white/10 -translate-y-1/2 hidden md:block" />
-          
-          <div className="flex flex-wrap md:flex-nowrap items-center justify-center gap-2 md:gap-4 relative">
-            {nodes.map((node, idx) => (
-              <div key={idx} className="flex items-center">
-                <motion.div
-                  className="flex flex-col items-center relative z-10"
-                  initial={{ opacity: 0, scale: 0 }}
-                  animate={{
-                    opacity: currentNode >= idx ? 1 : 0.3,
-                    scale: currentNode === idx ? 1.3 : 1,
-                  }}
-                  transition={{ duration: 0.4 }}
-                >
-                  {/* Node Circle */}
-                  <div
-                    className={`rounded-full flex items-center justify-center mb-3 transition-all ${
-                      currentNode >= idx
-                        ? "bg-[#38BDF8] shadow-lg shadow-[#38BDF8]/50 w-20 h-20 md:w-24 md:h-24"
-                        : "bg-white/10 w-16 h-16 md:w-20 md:h-20"
-                    }`}
-                  >
-                    <span className={`${currentNode >= idx ? "text-5xl md:text-6xl" : "text-3xl md:text-4xl"}`}>
-                      {node.emoji}
-                    </span>
-                  </div>
-                  <p className={`text-sm md:text-base font-bold text-center whitespace-nowrap ${
-                    currentNode >= idx ? "text-white" : "text-white/40"
-                  }`}>
-                    {node.label}
-                  </p>
-                </motion.div>
-
-                {/* Arrow between nodes */}
-                {idx < nodes.length - 1 && (
-                  <motion.div
-                    className="text-2xl md:text-4xl mx-1 md:mx-2"
-                    animate={{
-                      color: currentNode > idx ? "#38BDF8" : "rgba(255,255,255,0.2)",
-                      scale: currentNode === idx ? [1, 1.3, 1] : 1,
-                    }}
-                    transition={{
-                      duration: 0.5,
-                      repeat: currentNode === idx ? Infinity : 0,
-                    }}
-                  >
-                    →
-                  </motion.div>
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Message Box Display */}
-        <div className="grid md:grid-cols-2 gap-12 mb-16 max-w-5xl mx-auto">
-          {/* Sender */}
-          <div className="flex flex-col items-center">
-            <div className="text-[8rem] leading-none mb-4">👨‍💻</div>
-            <p className="text-3xl text-white font-bold mb-6">YOU</p>
-            <div className="bg-[#38BDF8]/10 border-2 border-[#38BDF8] rounded-2xl px-8 py-6 w-full">
-              <p className="text-4xl text-white text-center">Hello 👋</p>
+        {/* Two Phones - Top */}
+        <div className="grid grid-cols-2 gap-8 max-w-4xl mx-auto mb-12">
+          {/* Sender Phone - Left */}
+          <motion.div
+            className="flex flex-col items-center"
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+          >
+            <div className="text-7xl mb-3">👨‍💻</div>
+            <p className="text-lg font-semibold text-foreground mb-4">YOU</p>
+            <div className="w-full bg-primary/5 border border-primary/30 rounded-2xl px-6 py-6">
+              <p className="text-2xl text-foreground text-center">Hello 👋</p>
             </div>
-          </div>
+          </motion.div>
 
-          {/* Receiver */}
-          <div className="flex flex-col items-center">
+          {/* Receiver Phone - Right */}
+          <motion.div
+            className="flex flex-col items-center"
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+          >
             <motion.div
-              className="text-[8rem] leading-none mb-4"
+              className="text-7xl mb-3"
               animate={
                 currentNode === nodes.length - 1
-                  ? { scale: [1, 1.15, 1] }
-                  : {}
+                  ? { scale: [1, 1.1, 1] }
+                  : { scale: 1 }
               }
               transition={{ duration: 0.5 }}
             >
               👩‍💻
             </motion.div>
-            <p className="text-3xl text-white font-bold mb-6">FRIEND</p>
-            <div className="bg-purple-500/10 border-2 border-purple-500 rounded-2xl px-8 py-6 w-full min-h-[100px] flex items-center justify-center">
+            <p className="text-lg font-semibold text-foreground mb-4">FRIEND</p>
+            <div className="w-full bg-secondary/5 border border-secondary/30 rounded-2xl px-6 py-6 min-h-[80px] flex items-center justify-center">
               {currentNode === nodes.length - 1 && (
                 <motion.p
-                  className="text-4xl text-white text-center"
+                  className="text-2xl text-foreground text-center"
                   initial={{ opacity: 0, scale: 0 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  transition={{ type: "spring", duration: 0.6 }}
+                  transition={{ type: "spring", stiffness: 200 }}
                 >
                   Hello 👋
                 </motion.p>
               )}
             </div>
+          </motion.div>
+        </div>
+
+        {/* Horizontal Journey - Full Width with Scroll */}
+        <div className="relative mb-12">
+          <div className="overflow-x-auto pb-6 -mx-6 px-6">
+            <div className="flex items-center justify-center gap-2 min-w-max">
+              {nodes.map((node, idx) => (
+                <div key={idx} className="flex items-center flex-shrink-0">
+                  <motion.div
+                    className={`network-node ${
+                      currentNode >= idx
+                        ? "network-node--active"
+                        : "network-node--inactive"
+                    }`}
+                    initial={{ opacity: 0, scale: 0 }}
+                    animate={{
+                      opacity: currentNode >= idx || currentNode === -1 ? 1 : 0.25,
+                      scale: currentNode === idx ? 1.15 : 1,
+                    }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <div className="network-node__icon" style={{ width: '70px', height: '70px', fontSize: '2.25rem' }}>
+                      <span>{node.icon}</span>
+                    </div>
+                    <div className="network-node__label">
+                      <div className="text-xs font-semibold uppercase tracking-wide">
+                        {node.label}
+                      </div>
+                    </div>
+                  </motion.div>
+
+                  {/* Arrow between nodes */}
+                  {idx < nodes.length - 1 && (
+                    <motion.div
+                      className="flex items-center mx-2"
+                      animate={{
+                        opacity: currentNode > idx ? 1 : 0.2,
+                      }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <div
+                        className={`connection-line w-8 ${
+                          currentNode > idx ? "connection-line--active" : ""
+                        }`}
+                      >
+                        <div className="connection-line__packet" />
+                      </div>
+                      <motion.div
+                        className={`text-xl ml-1 ${
+                          currentNode > idx ? "text-primary" : "text-muted-foreground/30"
+                        }`}
+                        animate={
+                          currentNode === idx
+                            ? { x: [0, 4, 0] }
+                            : { x: 0 }
+                        }
+                        transition={{
+                          duration: 0.5,
+                          repeat: currentNode === idx ? Infinity : 0,
+                        }}
+                      >
+                        →
+                      </motion.div>
+                    </motion.div>
+                  )}
+                </div>
+              ))}
+            </div>
           </div>
+          
+          {/* Scroll hint */}
+          {currentNode === -1 && (
+            <motion.div
+              className="text-center text-xs text-muted-foreground mt-2"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1 }}
+            >
+              ← Scroll to see full journey →
+            </motion.div>
+          )}
         </div>
 
         {/* Control Button */}
         <div className="text-center mb-12">
           {currentNode < nodes.length - 1 ? (
-            <Button
+            <button
               onClick={handleSendMessage}
               disabled={currentNode >= 0 && currentNode < nodes.length - 1}
-              className="bg-[#38BDF8] hover:bg-[#38BDF8]/80 text-white text-2xl px-12 py-8 rounded-2xl font-bold"
-              size="lg"
+              className="btn-primary text-lg disabled:opacity-50"
             >
               {currentNode >= 0 && currentNode < nodes.length - 1 ? "Sending..." : "Send Message →"}
-            </Button>
+            </button>
           ) : (
-            <Button
+            <button
               onClick={handleReset}
-              className="bg-white/10 hover:bg-white/20 text-white text-2xl px-12 py-8 rounded-2xl font-bold border-2 border-white/20"
-              size="lg"
+              className="btn-secondary text-base"
             >
               Send Another Message
-            </Button>
+            </button>
           )}
         </div>
 
         {/* Simple Explanation */}
         {currentNode === nodes.length - 1 && (
           <motion.div
-            className="max-w-4xl mx-auto text-center"
+            className="max-w-3xl mx-auto text-center"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
           >
-            <p className="text-3xl text-white/80">
-              Your message travels through <span className="text-[#38BDF8] font-bold">9 steps</span> in milliseconds! ⚡
+            <p className="text-xl text-muted-foreground">
+              Your message travels through <span className="text-primary font-semibold">{nodes.length} steps</span> in milliseconds
             </p>
           </motion.div>
         )}

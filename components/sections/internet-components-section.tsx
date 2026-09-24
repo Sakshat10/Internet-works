@@ -10,176 +10,179 @@ export function InternetComponentsSection() {
     {
       id: 0,
       name: "YOU",
-      subtitle: "(Home)",
-      emoji: "🏠",
-      analogy: "Your house",
+      icon: "📱",
+      analogy: "Your device",
       description: "Where your message starts",
-      detail: "This is your computer, phone, or tablet",
+      detail: "Your computer, phone, or tablet connects to the network",
     },
     {
       id: 1,
       name: "ROUTER",
-      subtitle: "(Postman)",
-      emoji: "📬",
-      analogy: "Postman",
-      description: "Picks up your message",
-      detail: "Forwards data from your device to the Internet",
+      icon: "📡",
+      analogy: "Traffic controller",
+      description: "Directs data toward its destination",
+      detail: "Your home router forwards data from your device to the Internet",
     },
     {
       id: 2,
       name: "ISP",
-      subtitle: "(Post Office)",
-      emoji: "🏢",
-      analogy: "Post office",
-      description: "Sends to right city",
-      detail: "Examples: Jio, Airtel, BSNL, ACT",
+      icon: "🏢",
+      analogy: "Internet provider",
+      description: "Connects you to the world",
+      detail: "Examples: Jio, Airtel, BSNL, ACT Fibernet",
     },
     {
       id: 3,
       name: "INTERNET",
-      subtitle: "(Highway)",
-      emoji: "🛣️",
-      analogy: "Highway",
-      description: "Fast road between cities",
-      detail: "Global network connecting everything",
+      icon: "🌐",
+      analogy: "Global network",
+      description: "Worldwide connection system",
+      detail: "Billions of connected computers, servers, and devices",
     },
     {
       id: 4,
       name: "SERVER",
-      subtitle: "(Shop)",
-      emoji: "🏪",
-      analogy: "Shop/Store",
-      description: "Where info is stored",
-      detail: "Stores websites, apps, and data",
+      icon: "🖥️",
+      analogy: "Data warehouse",
+      description: "Where websites live",
+      detail: "Powerful computers storing websites, apps, and data",
     },
   ];
 
   return (
     <section
       id="section-4"
-      className="min-h-screen flex items-center justify-center py-20 px-6"
+      className="presentation-section"
     >
-      <div className="max-w-[1400px] mx-auto w-full">
-        {/* Section Number and Title */}
+      <div className="presentation-content">
+        {/* Section Label and Title */}
         <motion.div
-          className="mb-16"
+          className="mb-20 text-center"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <div className="text-sm font-bold text-muted-foreground mb-3 uppercase tracking-wider">
-            03 / COMPONENTS
-          </div>
-          <h2 className="text-5xl font-bold text-foreground">
+          <div className="section-label mb-4">03 / NETWORK</div>
+          <h2 className="section-title">
             Who Helps Your Message Travel?
           </h2>
         </motion.div>
 
-        {/* Horizontal Flow */}
-        <motion.div
-          className="bg-card border-2 border-border rounded-3xl p-12 mb-8"
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.2 }}
-        >
-          {/* Horizontal Components */}
-          <div className="relative flex items-center justify-between gap-4 mb-8">
-            {components.map((component, idx) => (
-              <div key={idx} className="flex items-center flex-1">
-                {/* Component Box */}
-                <motion.button
-                  onClick={() => setSelectedComponent(selectedComponent === idx ? null : idx)}
-                  className={`flex flex-col items-center gap-3 p-6 rounded-2xl border-2 transition-all w-full ${
-                    selectedComponent === idx
-                      ? "bg-primary/20 border-primary scale-105"
-                      : "bg-card border-border hover:border-primary/50"
-                  }`}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
+        {/* Horizontal Journey - NO BORDER CARD */}
+        <div className="journey-container mb-12">
+          {components.map((component, idx) => (
+            <div key={idx} className="flex items-center">
+              {/* Visual Node */}
+              <motion.button
+                onClick={() => setSelectedComponent(selectedComponent === idx ? null : idx)}
+                className={`network-node journey-node ${
+                  selectedComponent === idx
+                    ? "network-node--active"
+                    : selectedComponent !== null
+                    ? "network-node--inactive"
+                    : ""
+                }`}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 + idx * 0.1 }}
+              >
+                <div className="network-node__icon">
+                  <span>{component.icon}</span>
+                </div>
+                <div className="network-node__label">
+                  <div className="node-title">{component.name}</div>
+                  <div className="node-subtitle mt-1">{component.analogy}</div>
+                </div>
+              </motion.button>
+
+              {/* Connection Line */}
+              {idx < components.length - 1 && (
+                <motion.div
+                  className="flex items-center mx-6"
+                  initial={{ opacity: 0, scaleX: 0 }}
+                  whileInView={{ opacity: 1, scaleX: 1 }}
                   viewport={{ once: true }}
-                  transition={{ delay: 0.3 + idx * 0.1 }}
-                  whileHover={{ y: -5 }}
+                  transition={{ delay: 0.3 + idx * 0.1, duration: 0.5 }}
                 >
-                  <div className="text-6xl">{component.emoji}</div>
-                  <div className="text-center">
-                    <div className="text-xl font-bold text-foreground">{component.name}</div>
-                    <div className="text-sm text-muted-foreground">{component.subtitle}</div>
-                  </div>
-                </motion.button>
-
-                {/* Arrow */}
-                {idx < components.length - 1 && (
-                  <motion.div
-                    className="px-4"
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.5 + idx * 0.1 }}
+                  <div
+                    className={`connection-line w-24 ${
+                      selectedComponent === idx ? "connection-line--active" : ""
+                    }`}
                   >
-                    <motion.div
-                      className="text-primary text-4xl"
-                      animate={{ x: [0, 10, 0] }}
-                      transition={{ duration: 1.5, repeat: Infinity, delay: idx * 0.2 }}
-                    >
-                      →
-                    </motion.div>
+                    <div className="connection-line__packet" />
+                  </div>
+                  <motion.div
+                    className={`text-2xl ml-2 ${
+                      selectedComponent === idx ? "text-primary" : "text-muted-foreground/40"
+                    }`}
+                    animate={
+                      selectedComponent === idx
+                        ? { x: [0, 6, 0] }
+                        : { x: 0 }
+                    }
+                    transition={{
+                      duration: 1.5,
+                      repeat: selectedComponent === idx ? Infinity : 0,
+                    }}
+                  >
+                    →
                   </motion.div>
-                )}
-              </div>
-            ))}
-          </div>
+                </motion.div>
+              )}
+            </div>
+          ))}
+        </div>
 
-          {/* Instruction */}
-          <motion.p
-            className="text-center text-lg text-muted-foreground"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 1 }}
-          >
-            Click each to learn more
-          </motion.p>
-        </motion.div>
+        {/* Instruction */}
+        <motion.p
+          className="text-center text-base text-muted-foreground mb-12"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.8 }}
+        >
+          Click each component to learn more
+        </motion.p>
 
-        {/* Details Panel */}
+        {/* Floating Explanation - appears near the active node */}
         <AnimatePresence mode="wait">
           {selectedComponent !== null && (
             <motion.div
               key={selectedComponent}
-              className="bg-primary/10 border-2 border-primary rounded-3xl p-8"
-              initial={{ opacity: 0, y: 30, scale: 0.95 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: -30, scale: 0.95 }}
-              transition={{ duration: 0.4 }}
+              className="max-w-2xl mx-auto"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.3 }}
             >
-              <div className="grid md:grid-cols-[auto_1fr] gap-8 items-center">
-                {/* Icon */}
-                <motion.div
-                  className="text-9xl"
-                  animate={{ rotate: [0, 5, -5, 0] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                >
-                  {components[selectedComponent].emoji}
-                </motion.div>
+              <div className="relative bg-[#0F172A]/95 backdrop-blur-xl border border-primary/20 rounded-2xl p-8">
+                {/* Accent line */}
+                <div className="absolute top-0 left-8 w-16 h-1 bg-primary rounded-full" />
+                
+                <div className="flex items-start gap-6">
+                  {/* Icon */}
+                  <motion.div
+                    className="text-6xl flex-shrink-0"
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    transition={{ type: "spring", stiffness: 200 }}
+                  >
+                    {components[selectedComponent].icon}
+                  </motion.div>
 
-                {/* Details */}
-                <div className="space-y-4">
-                  <div>
-                    <h3 className="text-4xl font-bold text-foreground mb-2">
+                  {/* Content */}
+                  <div className="flex-1 space-y-3">
+                    <h3 className="text-2xl font-bold text-foreground">
                       {components[selectedComponent].name}
                     </h3>
-                    <p className="text-2xl text-primary font-semibold">
-                      Like: {components[selectedComponent].analogy}
+                    <p className="text-lg text-primary font-medium">
+                      {components[selectedComponent].description}
+                    </p>
+                    <p className="explanation-text text-sm">
+                      {components[selectedComponent].detail}
                     </p>
                   </div>
-                  <div className="h-1 w-20 bg-primary rounded-full" />
-                  <p className="text-2xl text-foreground">
-                    {components[selectedComponent].description}
-                  </p>
-                  <p className="text-xl text-muted-foreground">
-                    {components[selectedComponent].detail}
-                  </p>
                 </div>
               </div>
             </motion.div>
@@ -187,17 +190,22 @@ export function InternetComponentsSection() {
         </AnimatePresence>
 
         {/* Key Takeaway */}
-        <motion.div
-          className="mt-8 bg-card border border-border rounded-2xl p-6 text-center"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.4 }}
-        >
-          <p className="text-2xl font-bold text-foreground">
-            Like sending mail: <span className="text-primary">You → Postman → Post Office → Highway → Shop!</span>
-          </p>
-        </motion.div>
+        {selectedComponent === null && (
+          <motion.div
+            className="max-w-3xl mx-auto text-center mt-16"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.4 }}
+          >
+            <p className="text-lg text-muted-foreground">
+              Your message doesn't magically jump from one device to another.
+            </p>
+            <p className="text-xl font-semibold text-foreground mt-2">
+              It travels through this <span className="text-primary">entire chain</span>, step by step.
+            </p>
+          </motion.div>
+        )}
       </div>
     </section>
   );

@@ -98,45 +98,47 @@ export function PresentationProvider({
       {/* Presentation Mode Toggle Button */}
       <motion.button
         onClick={togglePresentationMode}
-        className={`fixed bottom-8 right-8 z-50 flex items-center gap-2 px-6 py-3 rounded-full font-semibold transition-all ${
+        className={`fixed bottom-6 right-6 z-50 flex items-center gap-2 px-5 py-2.5 rounded-full font-semibold text-sm transition-all ${
           isPresentationMode
-            ? "bg-neon-pink text-white shadow-lg shadow-neon-pink/50"
-            : "bg-gradient-to-r from-neon-blue to-neon-purple text-white shadow-lg shadow-neon-blue/50"
-        }`}
+            ? "bg-secondary/20 text-secondary border border-secondary/30 hover:bg-secondary/30"
+            : "bg-primary/20 text-primary border border-primary/30 hover:bg-primary/30"
+        } backdrop-blur-sm`}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
       >
-        <Presentation className="w-5 h-5" />
-        {isPresentationMode ? "Exit Presentation" : "Presentation Mode"}
+        <Presentation className="w-4 h-4" />
+        {isPresentationMode ? "Exit" : "Present"}
       </motion.button>
 
-      {/* Presentation Mode Navigation */}
+      {/* Presentation Mode Navigation - Minimal Bottom Bar */}
       <AnimatePresence>
         {isPresentationMode && (
           <motion.div
             initial={{ opacity: 0, y: 100 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 100 }}
-            className="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-50 flex items-center gap-4 bg-black/80 backdrop-blur-lg border border-neon-blue/50 rounded-full px-6 py-3 shadow-lg shadow-neon-blue/30"
+            className="presentation-controls"
           >
             <button
               onClick={prevSection}
               disabled={currentSection === 0}
-              className="p-2 rounded-full bg-neon-blue/20 hover:bg-neon-blue/40 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+              className="presentation-controls__button"
+              aria-label="Previous section"
             >
-              <ChevronLeft className="w-6 h-6 text-neon-blue" />
+              <ChevronLeft className="w-5 h-5" />
             </button>
 
-            <div className="text-white font-semibold px-4">
-              {currentSection + 1} / {totalSections}
+            <div className="presentation-controls__progress">
+              {String(currentSection + 1).padStart(2, '0')} / {String(totalSections).padStart(2, '0')}
             </div>
 
             <button
               onClick={nextSection}
               disabled={currentSection === totalSections - 1}
-              className="p-2 rounded-full bg-neon-blue/20 hover:bg-neon-blue/40 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+              className="presentation-controls__button"
+              aria-label="Next section"
             >
-              <ChevronRight className="w-6 h-6 text-neon-blue" />
+              <ChevronRight className="w-5 h-5" />
             </button>
           </motion.div>
         )}
